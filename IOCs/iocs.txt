@@ -1,0 +1,27 @@
+# Indicators of Compromise (IOCs)
+# Putty Patrol - PuTTY Dropper with PowerFun Reverse Shell
+# Generated: 2026-07-24
+# Format: Type:Value:Description
+
+# === FILE INDICATORS ===
+SHA256:0C82E654C09C8FD9FDF4899718EFA37670974C9EEC5A8FC18A167F93CEA6EE83:putty.exe
+FILENAME:putty.exe:Malicious dropper masquerading as PuTTY
+
+# === NETWORK INDICATORS ===
+DOMAIN:bonus2.corporatebonusapplication.local:PowerFun reverse shell C2 server
+IP:192.168.200.10:Test environment Kali IP (not a hardcoded IOC)
+PORT:8443:C2 communication port (SSL/TLS)
+
+# === HOST-BASED INDICATORS ===
+PROCESS:powershell.exe:Spawns hidden PowerShell with encoded Base64 payload
+REGISTRY:HKCU\Software\Microsoft\Windows\CurrentVersion\Run:Suspected persistence key
+REGISTRY:HKLM\Software\Microsoft\Windows\CurrentVersion\Run:Suspected persistence key
+
+# === STRING / PATTERN INDICATORS ===
+PATTERN:H4sIAOW/UWECA51W227:Base64 GZip payload prefix (dropper signature)
+PATTERN:powerfun:PowerFun RAT function name
+PATTERN:Get-Webclient:PowerFun helper function name
+PATTERN:bonus2.corporatebonusapplication.local:C2 domain in PowerShell script
+
+# === YARA RULE ===
+YARA:detect_malware.yar:Custom YARA rule for this malware family
